@@ -1,0 +1,20 @@
+# permissions for end users to view dynamicquota.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dynamicquota-viewer-role
+rules:
+- apiGroups:
+  - webapp.zt.domain
+  resources:
+  - dynamicquota
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - webapp.zt.domain
+  resources:
+  - dynamicquota/status
+  verbs:
+  - get

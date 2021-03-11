@@ -1,0 +1,10 @@
+apiVersion: webapp.zt.domain/v1
+kind: DynamicQuota
+metadata:
+  name: dynamicquota-sample
+spec:
+  # Add fields here
+  nameSpaces:
+    - default
+    - quota-example
+  changePolicy: min

@@ -1,0 +1,90 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.2.5
+  creationTimestamp: null
+  name: dynamicquota.webapp.zt.domain
+spec:
+  group: webapp.zt.domain
+  names:
+    kind: DynamicQuota
+    listKind: DynamicQuotaList
+    plural: dynamicquota
+    singular: dynamicquota
+  scope: Cluster
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: DynamicQuota is the Schema for the dynamicquota API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: DynamicQuotaSpec defines the desired state of DynamicQuota
+          properties:
+            changePolicy:
+              description: Specifies which policy that we will choose to compute the
+                change ratio
+              enum:
+              - min
+              - mean
+              - max
+              type: string
+            nameSpaces:
+              description: A list of name of the specify namespace，不为空
+              items:
+                type: string
+              minItems: 1
+              type: array
+          type: object
+        status:
+          description: DynamicQuotaStatus defines the observed state of DynamicQuota
+          properties:
+            nodeList:
+              items:
+                type: string
+              type: array
+            totalCpu:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                of cluster Important: Run "make" to regenerate code after modifying
+                this file'
+              format: int32
+              type: integer
+            totalMem:
+              format: int32
+              type: integer
+            totalNet:
+              format: int32
+              type: integer
+          required:
+          - nodeList
+          - totalCpu
+          - totalMem
+          - totalNet
+          type: object
+      type: object
+  version: v1
+  versions:
+  - name: v1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

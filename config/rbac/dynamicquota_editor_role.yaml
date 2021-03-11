@@ -1,0 +1,24 @@
+# permissions for end users to edit dynamicquota.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dynamicquota-editor-role
+rules:
+- apiGroups:
+  - webapp.zt.domain
+  resources:
+  - dynamicquota
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - webapp.zt.domain
+  resources:
+  - dynamicquota/status
+  verbs:
+  - get

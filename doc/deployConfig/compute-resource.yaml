@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources
+  namespace: quota-example
+spec:
+  hard:
+    pods: "4"
+    requests.cpu: 1200m
+    requests.memory: 1Gi
+    limits.cpu: 2000m
+    limits.memory: 2Gi

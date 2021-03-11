@@ -1,0 +1,7 @@
+domain: zt.domain
+repo: dynamicQuota
+resources:
+- group: webapp
+  kind: DynamicQuota
+  version: v1
+version: "2"
